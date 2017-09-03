@@ -125,7 +125,8 @@ extension MasterViewController {
 extension MasterViewController: ModelDelegate {
 
   func modelUpdated() {
-    // Replace this stub.
+    refreshControl?.endRefreshing()
+    tableView.reloadData()
   }
 
   func errorUpdating(_ error: NSError) {
