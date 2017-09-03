@@ -130,10 +130,13 @@ extension MasterViewController: ModelDelegate {
   }
 
   func errorUpdating(_ error: NSError) {
-    let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
-    
-    alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
-    
+    let message: String
+    if error.code == 1 {
+      message = "Log into iCloud on your device and make sure the iCloud is turned on for this app."
+    } else {
+      message = error.localizedDescription
+    }
+    let alertController = UIAlertController(title: nil, message: message, preferredStyle: .alert)
     present(alertController, animated: true, completion: nil)
   }
 }
