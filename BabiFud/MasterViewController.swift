@@ -130,7 +130,11 @@ extension MasterViewController: ModelDelegate {
   }
 
   func errorUpdating(_ error: NSError) {
-    // Replace this stub.
+    let alertController = UIAlertController(title: nil, message: error.localizedDescription, preferredStyle: .alert)
+    
+    alertController.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: nil))
+    
+    present(alertController, animated: true, completion: nil)
   }
 }
 
