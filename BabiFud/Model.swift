@@ -99,10 +99,14 @@ class Model {
   }
   
   func fetchEtablishments(_ location: CLLocation, radiusInMeters: CLLocationDistance) {
+    // converts radiusInMeters to kilometers
     let radiusInKilometers = radiusInMeters / 1000.0
+    // finds all establishments within a certain distance from a specific location and distance
     let locationPredicate = NSPredicate(format: "distanceToLocation: fromLocation:(%K,%@) < %f","Location", location, radiusInKilometers)
+    // query created using record type and predicate (locationPredicate)
     let query = CKQuery(recordType: EstablishmentType, predicate: locationPredicate)
     
+    // perform the query, sends query to icloud, padding nil to inZoneWith runs query against default zone (public DB)
     publicDB.perform(query, inZoneWith: nil) { [unowned self] results, error in
       if let error = error {
         DispatchQueue.main.async {
