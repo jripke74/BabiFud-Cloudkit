@@ -118,7 +118,24 @@ class Establishment: NSObject, MKAnnotation {
   }
 
   func loadCoverPhoto(completion:@escaping (_ photo: UIImage?) -> ()) {
-    // Replace this stub.
-    completion(nil)
+    // load image asynchronously
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.background).async {
+      var image: UIImage!
+      defer {
+        completion(image)
+      }
+      
+      guard let asset = self.record["CoverPhoto"] as? CKAsset else {
+        return
+      }
+      
+      let imageData: Data
+      do {
+        imageData = try Data(contentsOf: asset.fileURL)
+      } catch {
+        return
+      }
+      image = UIImage(data: imageData)
+    }
   }
 }
