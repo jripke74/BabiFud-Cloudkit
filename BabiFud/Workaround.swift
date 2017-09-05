@@ -53,11 +53,11 @@ func upload(_ db: CKDatabase,
   db.save(establishment, completionHandler: { record, error in
     
     guard error == nil else {
-      print("error setting up record \(error)")
+      print("error setting up record \(String(describing: error))")
       return
     }
     
-    print("saved: \(record)")
+    print("saved: \(String(describing: record))")
     
     for rating in ratings {
       
@@ -69,7 +69,7 @@ func upload(_ db: CKDatabase,
       
       db.save(ratingRecord, completionHandler: { record, error in
         guard error == nil else {
-          print("error setting up record \(error)")
+          print("error setting up record \(String(describing: error))")
           return
         }
       }) 

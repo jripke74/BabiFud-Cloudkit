@@ -66,7 +66,7 @@ class Model {
       guard error == nil else {
         DispatchQueue.main.async {
           self.delegate?.errorUpdating(error! as NSError)
-          print("Cloud Query Error - Refresh: \(error)")
+          print("Cloud Query Error - Refresh: \(String(describing: error))")
         }
         return
       }

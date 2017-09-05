@@ -159,7 +159,7 @@ final class DetailViewController: UITableViewController {
     detail.fetchNote() { note in
       guard let noteText = note else { return }
 
-      print("Establishment record note = \(note)")
+      print("Establishment record note = \(String(describing: note))")
 
       DispatchQueue.main.async {
         self.noteTextView.text = noteText
